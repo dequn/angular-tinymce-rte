@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>rte测试</title>
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.3.5/angular.min.js"></script>
+  <script type="text/javascript" src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script type="text/javascript" src="../src/rte.app.js"></script>
+  <script type="text/javascript" src="../src/rte.service.js"></script>
+  <script type="text/javascript" src="../src/rte.directive.js"></script>
+  <script type="text/javascript">
+    angular.module('test', ['ui.rte']).controller('TestController', ['rte', '$scope',
+
+      function(rte, $scope) {
+
+        $scope.initWithContent = function() {
+          rte.initWithContent("#init", 'aaaaaaaaaaaaaaa');
+        }
+
+        $scope.getContent = function() {
+          $scope.content = rte.getContent();
+        }
+
+        $scope.cancel = function(){
+        rte.resetContent();
+        rte.destroy();
+
+        }
+      }
+    ]);
+  </script>
+</head>
+
+<body ng-app="test" ng-controller="TestController">
+  <rte></rte>
+  <div id="init"><strong><a>adfjlkasdfjlaksdjf</a></strong></div>
+  <button ng-click="initWithContent();">initWithContent</button>
+  <button ng-click="getContent();">getContent</button>
+  <button ng-click="cancel();">cancel</button>
+  {{content}}
+</body>
+
+
+</html>
